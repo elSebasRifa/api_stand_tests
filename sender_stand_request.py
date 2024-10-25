@@ -15,9 +15,9 @@ def post_new_client_kit(kit_body,auth_token):
                          json = kit_body,  # Datos a enviar en la solicitud.
                          headers = auth_token)  # Encabezados de solicitud.
 
-def post(user_body):
+def get_users_table(user_body):
     # Realiza una solicitud POST para buscar kits por productos.
-    return requests.post(configuration.URL_SERVICE + configuration.PRODUCTS_KITS_PATH, # Concatenación de URL base y ruta.
+    return requests.post(configuration.URL_SERVICE + configuration.USERS_TABLE_PATH, # Concatenación de URL base y ruta.
                          json=user_body, # Datos a enviar en la solicitud.
                          headers=data.headers) # Encabezados de solicitud.
 
