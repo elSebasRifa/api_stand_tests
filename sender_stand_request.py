@@ -9,11 +9,17 @@ def post_new_user(user_body):
                          json=user_body, # Datos a enviar en la solicitud.
                          headers=data.headers) # Encabezados de solicitud.
 
-def post_new_client_kit(kit_body,auth_token):
-    # Envía una solicitud para crear un kit personal para este usuario o usuaria. Asegúrate de pasar también el encabezado Autorization
-    return requests.post(configuration.URL_SERVICE + configuration.CREATE_KIT_PATH,
-                         json = kit_body,  # Datos a enviar en la solicitud.
-                         headers = auth_token)  # Encabezados de solicitud.
+
+def post_new_client_kit(kit_body):
+    headers = data.headers.copy()
+    auth_token = post_new_user(data.user_body)
+    headers["Authorization"] = f"Bearer {auth_token}"
+
+    response = requests.post(configuration.URL_SERVICE + configuration.CREATE_KIT_PATH,
+                             json=kit_body,
+                             headers=headers)
+
+    return response
 
 def get_users_table(user_body):
     # Realiza una solicitud POST para buscar kits por productos.
