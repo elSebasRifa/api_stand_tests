@@ -12,17 +12,16 @@ def get_kit_body(name):
 # Función de prueba positiva
 def positive_assert(name):
     kit_body = get_kit_body(name)# El cuerpo de la solicitud actualizada se guarda en la variable kit_body
-    user_response = sender_stand_request.post_new_client_kit(data.kit_body,data.headers) # El resultado de la solicitud para crear un nuevo usuario o usuaria se guarda en la variable response
+    user_response = sender_stand_request.post_new_client_kit(data.kit_body) # El resultado de la solicitud para crear un nuevo usuario o usuaria se guarda en la variable response
     assert user_response.status_code == 201 # Comprueba si el código de estado es 201
 
 # Función de prueba negativa para los casos en los que la solicitud devuelve un error relacionado con caracteres
 def negative_assert_symbol(name):
     kit_body = get_kit_body(name)  # El cuerpo de la solicitud actualizada se guarda en la variable kit_body
-    user_response = sender_stand_request.post_new_client_kit(kit_body,data.headers)  # El resultado de la solicitud para crear un nuevo usuario o usuaria se guarda en la variable response
+    user_response = sender_stand_request.post_new_client_kit(kit_body)  # El resultado de la solicitud para crear un nuevo usuario o usuaria se guarda en la variable response
     assert user_response.status_code == 400# Comprueba si el código de estado es 400
     assert user_response.json()["code"] == 400# Comprueba que el atributo code en el cuerpo de respuesta es 400
     assert user_response.json()["message"] == "No se han aprobado todos los parámetros requeridos"
-
 
 #Prueba 1
 # El número permitido de caracteres (1): kit_body = { "name": "a"}

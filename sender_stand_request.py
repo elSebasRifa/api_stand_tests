@@ -12,9 +12,8 @@ def post_new_user(user_body):
 
 def post_new_client_kit(kit_body):
     headers = data.headers.copy()
-    auth_token = post_new_user(data.user_body)
+    auth_token = post_new_user(data.user_body).json()["authToken"]
     headers["Authorization"] = f"Bearer {auth_token}"
-
     response = requests.post(configuration.URL_SERVICE + configuration.CREATE_KIT_PATH,
                              json=kit_body,
                              headers=headers)
@@ -27,10 +26,3 @@ def get_users_table(user_body):
                          json=user_body, # Datos a enviar en la solicitud.
                          headers=data.headers) # Encabezados de solicitud.
 
-response = post_new_user(data.user_body);
-print(response.status_code)
-print(response.json())
-
-response_1 = post_new_client_kit(data.kit_body,data.headers);
-print(response_1.status_code)
-print(response_1.json())
